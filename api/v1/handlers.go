@@ -1,12 +1,11 @@
 package v1
 
-import (
-	"fmt"
-	"net/http"
-	"time"
-)
+import "net/http"
 
-func HelloHandler(w http.ResponseWriter, req *http.Request) {
-	time.Sleep(10 * time.Second)
-	fmt.Fprintf(w, "Hello world!\n")
+type ResponseMessage struct {
+	Message string `json:"message"`
+}
+
+func PingPongHandler(w http.ResponseWriter, req *http.Request) {
+	writeJSON(ResponseMessage{"pong"}, w)
 }

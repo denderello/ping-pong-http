@@ -13,5 +13,5 @@ func (v1 V1API) PathPrefix() string {
 }
 
 func (v1 V1API) RegisterHandlers(router *mux.Router) {
-	router.HandleFunc("/", HelloHandler)
+	router.HandleFunc("/ping", PingPongHandler)
 }
