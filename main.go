@@ -13,15 +13,18 @@ import (
 )
 
 func main() {
+	l := logrus.StandardLogger()
 	s := server.New(server.ServerConfig{
 		Addr: server.Address{
 			Port: "9000",
 		},
 		ShutdownCooldown: 10 * time.Second,
-		Logger:           logrus.StandardLogger(),
+		Logger:           l,
 	})
 
-	s.RegisterAPI(v1.V1API{})
+	s.RegisterAPI(&v1.V1API{
+		Logger: l,
+	})
 
 	sigs := make(chan os.Signal, 1)
 	go func() {
