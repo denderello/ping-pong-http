@@ -24,6 +24,11 @@
 			"Rev": "9c19ed558d5df4da88e2ade9c8940d742aef0e7e"
 		},
 		{
+			"ImportPath": "github.com/ogier/pflag",
+			"Comment": "v0.0.1-7-g45c278a",
+			"Rev": "45c278ab3607870051a2ea9040bb85fcb8557481"
+		},
+		{
 			"ImportPath": "golang.org/x/net/netutil",
 			"Rev": "35ec611a141ee705590b9eb64d673f9e6dfeb1ac"
 		},
