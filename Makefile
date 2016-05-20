@@ -1,14 +1,10 @@
-PROJECT=ping-pong-http
-ORGANIZATION=denderello
+.PHONY: build install 
 
-PROJECT_PATH := "github.com/$(ORGANIZATION)/$(PROJECT)"
-BIN := $(PROJECT)
-SOURCE=$(shell find . -name '*.go')
-
-.PHONY: install 
-
-$(BIN): $(SOURCE)
+build:
 	go build .
 
 install:
 	go install .
+
+test:
+	./test.sh

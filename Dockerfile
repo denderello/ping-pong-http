@@ -6,7 +6,7 @@ RUN apk add --update \
 COPY . $GOPATH/src/github.com/denderello/ping-pong-http
 WORKDIR $GOPATH/src/github.com/denderello/ping-pong-http
 
-RUN make install
+RUN make test install
 
 ENTRYPOINT ["ping-pong-http"]
 
