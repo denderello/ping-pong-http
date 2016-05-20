@@ -1,4 +1,4 @@
-.PHONY: build install 
+.PHONY: build install test
 
 build:
 	go build .
