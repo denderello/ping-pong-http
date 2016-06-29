@@ -20,6 +20,7 @@ var (
 		port             string
 		shutdownCooldown time.Duration
 		logLevel         string
+		enableProfiling  bool
 	}
 )
 
@@ -28,6 +29,7 @@ func init() {
 	pflag.StringVar(&flags.port, "port", "9000", "Port to listen on")
 	pflag.DurationVar(&flags.shutdownCooldown, "shutdown-cooldown", 10*time.Second, "Cooldown period to keep open connections alive before killing them")
 	pflag.StringVar(&flags.logLevel, "log-level", "info", "Log level to use for log outputs")
+	pflag.BoolVar(&flags.enableProfiling, "enable-profiling", false, "Whether pprof profiling should be enabled")
 
 	pflag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "Usage of Ping Pong HTTP\n")
@@ -53,6 +55,7 @@ func main() {
 		},
 		ShutdownCooldown: flags.shutdownCooldown,
 		Logger:           l,
+		EnableProfiling:  flags.enableProfiling,
 	})
 
 	s.RegisterAPI(&v1.V1API{

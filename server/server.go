@@ -2,6 +2,7 @@ package server
 
 import (
 	"net/http"
+	_ "net/http/pprof"
 	"time"
 
 	"github.com/gorilla/handlers"
@@ -16,6 +17,7 @@ type ServerConfig struct {
 	Addr             Addresser
 	ShutdownCooldown time.Duration
 	Logger           log.Logger
+	EnableProfiling  bool
 }
 
 type Server struct {
@@ -28,8 +30,13 @@ type Server struct {
 
 func New(sc ServerConfig) *Server {
 	r := mux.NewRouter()
-	h := handlers.CombinedLoggingHandler(&log.WriterBridge{Logger: sc.Logger}, r)
 
+	// Register the default http ServeMux for everything under /debug/pprof/debug/pprof  and let Go handle the rest internally
+	if sc.EnableProfiling {
+		r.PathPrefix("/debug/pprof/").Handler(http.DefaultServeMux)
+	}
+
+	h := handlers.CombinedLoggingHandler(&log.WriterBridge{Logger: sc.Logger}, r)
 	return &Server{
 		addr:             sc.Addr,
 		shutdownCooldown: sc.ShutdownCooldown,
